@@ -1,0 +1,30 @@
+{
+  "name": "@talentdash/jobs",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.810.0",
+    "@prisma/client": "^6.19.3",
+    "@talentdash/db": "workspace:*",
+    "@talentdash/types": "workspace:*",
+    "@talentdash/utils": "workspace:*",
+    "@upstash/redis": "^1.38.0",
+    "bullmq": "^5.76.8",
+    "dotenv": "^17.4.2",
+    "ioredis": "^5.10.1",
+    "openai": "^6.37.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.19",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}

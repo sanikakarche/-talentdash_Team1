@@ -1,0 +1,38 @@
+# This file represents the configuration for Cloud Scheduler jobs
+# that hit the Cloud Run service to trigger scheduled workloads,
+# or direct Cloud Run Jobs for one-shot batch tasks.
+#
+# Because BullMQ handles cron internally via repeatable jobs,
+# we only need this if we want to bypass BullMQ's scheduler 
+# and use GCP's native Cloud Scheduler for higher reliability.
+
+jobs:
+  # Example native Cloud Run Job for massive batch tasks that exceed 
+  # BullMQ worker limits or need dedicated resources.
+  - name: generate-sitemaps
+    description: "Generates sitemaps for all regions"
+    schedule: "0 3 * * *"
+    timeZone: "UTC"
+    container:
+      image: gcr.io/PROJECT_ID/talentdash-jobs:latest
+      command: ["node", "apps/jobs/dist/scripts/generate-sitemaps.js"]
+      resources:
+        limits:
+          cpu: "2000m"
+          memory: "1024Mi"
+      env:
+        - name: NODE_ENV
+          value: "production"
+      # Secrets ...
+
+  - name: build-search-index
+    description: "Builds search index and uploads to R2"
+    schedule: "0 */2 * * *"
+    timeZone: "UTC"
+    container:
+      image: gcr.io/PROJECT_ID/talentdash-jobs:latest
+      command: ["node", "apps/jobs/dist/scripts/build-search-index.js"]
+      resources:
+        limits:
+          cpu: "1000m"
+          memory: "512Mi"

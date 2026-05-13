@@ -1,0 +1,70 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ES2022"
+    ],
+
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+
+    "jsx": "preserve",
+
+    "allowJs": false,
+    "strict": true,
+
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+
+    "incremental": true,
+
+    "noEmit": true,
+
+    "baseUrl": ".",
+
+    "paths": {
+      "@talentdash/auth": [
+        "packages/auth/src"
+      ],
+      "@talentdash/auth/*": [
+        "packages/auth/src/*"
+      ],
+
+      "@talentdash/db": [
+        "packages/db/src"
+      ],
+      "@talentdash/db/*": [
+        "packages/db/src/*"
+      ],
+
+      "@talentdash/ui": [
+        "packages/ui/src"
+      ],
+      "@talentdash/ui/*": [
+        "packages/ui/src/*"
+      ],
+
+      "@talentdash/utils": [
+        "packages/utils/src"
+      ],
+      "@talentdash/utils/*": [
+        "packages/utils/src/*"
+      ],
+
+      "@talentdash/types": [
+        "packages/types/src"
+      ],
+      "@talentdash/types/*": [
+        "packages/types/src/*"
+      ]
+    }
+  }
+}

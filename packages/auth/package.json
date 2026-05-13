@@ -1,0 +1,16 @@
+{
+  "name": "@talentdash/auth",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@clerk/nextjs": "^7.3.3",
+    "zod": "^4.4.3"
+  }
+}

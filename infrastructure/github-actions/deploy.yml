@@ -1,0 +1,58 @@
+name: Deploy
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "apps/jobs/**"
+      - "packages/**"
+      - "infrastructure/cloudrun/**"
+
+env:
+  PROJECT_ID: talentdash-prod
+  REGION: asia-south1
+  SERVICE_NAME: talentdash-jobs-worker
+
+jobs:
+  deploy-jobs-worker:
+    name: Deploy Jobs Worker
+    runs-on: ubuntu-latest
+    permissions:
+      contents: "read"
+      id-token: "write"
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - id: "auth"
+        name: "Authenticate to Google Cloud"
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: "projects/123456789/locations/global/workloadIdentityPools/github/providers/my-repo"
+          service_account: "deployer@talentdash-prod.iam.gserviceaccount.com"
+
+      - name: "Set up Cloud SDK"
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: "Configure Docker Auth"
+        run: gcloud auth configure-docker gcr.io --quiet
+
+      - name: "Build Docker Image"
+        run: docker build -t gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }} -f apps/jobs/Dockerfile .
+
+      - name: "Push Docker Image"
+        run: docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
+
+      - name: "Deploy to Cloud Run"
+        id: deploy
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          service: ${{ env.SERVICE_NAME }}
+          region: ${{ env.REGION }}
+          image: gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
+          flags: "--allow-unauthenticated"
+
+      - name: "Verify Deployment"
+        run: |
+          curl -s --fail ${{ steps.deploy.outputs.url }}/health || exit 1

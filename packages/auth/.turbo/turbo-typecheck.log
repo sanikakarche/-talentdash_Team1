@@ -1,0 +1,5 @@
+
+
+> @talentdash/auth@1.0.0 typecheck /Users/ashishkumarjha/Desktop/talentdash/packages/auth
+> tsc --noEmit
+

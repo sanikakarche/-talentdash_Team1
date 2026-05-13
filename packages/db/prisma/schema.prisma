@@ -1,0 +1,546 @@
+generator client {
+  provider = "prisma-client-js"
+  engineType = "binary"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                   String                    @id @default(cuid())
+  clerkId              String                    @unique
+  email                String                    @unique
+  name                 String?
+  avatarUrl            String?
+  role                 UserRole                  @default(USER)
+  region               String?
+  createdAt            DateTime                  @default(now())
+  updatedAt            DateTime                  @updatedAt
+  auditLogs            AuditLog[]
+  forumReplies         ForumReply[]
+  forumThreads         ForumThread[]
+  interviewExperiences InterviewExperience[]
+  interviewAnswers     InterviewQuestionAnswer[]
+  offerComparisons     OfferComparison[]
+  offers               OfferEntry[]
+  reviewHelpfulVotes   ReviewHelpful[]
+  salaryEntries        SalaryEntry[]
+  toolUsageLogs        ToolUsageLog[]
+  workplaceReviews     WorkplaceReview[]
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String
+  action     String
+  entityType String
+  entityId   String
+  metadata   Json?
+  createdAt  DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+}
+
+model PageGenerationJob {
+  id          String    @id @default(cuid())
+  pageType    String
+  slug        String
+  region      String
+  status      JobStatus @default(PENDING)
+  generatedAt DateTime?
+  error       String?
+  createdAt   DateTime  @default(now())
+
+  @@index([pageType, region])
+}
+
+model Company {
+  id                   String                @id @default(cuid())
+  name                 String
+  slug                 String                @unique
+  description          String?
+  logoUrl              String?
+  coverImageUrl        String?
+  website              String?
+  industry             String?
+  size                 CompanySize?
+  headquarters         String?
+  country              String?
+  region               String[]
+  foundedYear          Int?
+  linkedinUrl          String?
+  isVerified           Boolean               @default(false)
+  isPublic             Boolean               @default(true)
+  employeeCount        Int?
+  aiSummary            String?
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+  benefits             CompanyBenefit[]
+  stats                CompanyStats?
+  forumThreads         ForumThread[]
+  interviewExperiences InterviewExperience[]
+  interviewQuestions   InterviewQuestion[]
+  jobListings          JobListing[]
+  offers               OfferEntry[]
+  salaryEntries        SalaryEntry[]
+  workplaceRankings    WorkplaceRanking[]
+  workplaceReviews     WorkplaceReview[]
+
+  @@index([slug])
+  @@index([industry])
+}
+
+model CompanyStats {
+  id                 String   @id @default(cuid())
+  companyId          String   @unique
+  overallRating      Float?
+  workLifeRating     Float?
+  cultureRating      Float?
+  compensationRating Float?
+  growthRating       Float?
+  totalReviews       Int      @default(0)
+  totalSalaries      Int      @default(0)
+  totalInterviews    Int      @default(0)
+  recommendPercent   Float?
+  updatedAt          DateTime @updatedAt
+  company            Company  @relation(fields: [companyId], references: [id])
+}
+
+model CompanyBenefit {
+  id          String  @id @default(cuid())
+  companyId   String
+  category    String
+  title       String
+  description String?
+  company     Company @relation(fields: [companyId], references: [id])
+
+  @@index([companyId])
+}
+
+model SalaryEntry {
+  id                  String          @id @default(cuid())
+  companyId           String
+  userId              String?
+  role                String
+  jobTitle            String
+  level               JobLevel?
+  baseSalary          Float
+  totalComp           Float
+  bonus               Float?
+  equity              Float?
+  currency            String
+  normalizedUsdSalary Float
+  location            String
+  city                String?
+  country             String?
+  region              String
+  yearsExp            Float?
+  yearsAtCompany      Float?
+  skills              String[]
+  education           EducationLevel?
+  isVerified          Boolean         @default(false)
+  approvedAt          DateTime?
+  approvedBy          String?
+  createdAt           DateTime        @default(now())
+  company             Company         @relation(fields: [companyId], references: [id])
+  user                User?           @relation(fields: [userId], references: [id])
+
+  @@index([role, region])
+  @@index([companyId])
+  @@index([location])
+}
+
+model SalaryAggregate {
+  id              String    @id @default(cuid())
+
+  role            String
+  level           JobLevel?
+
+  location        String
+  region          String
+
+  currency        String
+
+  medianBase      Float
+  medianTotal     Float
+
+  p25Total        Float
+  p75Total        Float
+
+  sampleCount     Int
+
+  confidenceScore Float
+
+  updatedAt       DateTime @updatedAt
+
+  @@unique([role, level, location, region])
+}
+
+model SalaryHeatmap {
+  id          String   @id @default(cuid())
+  role        String
+  location    String
+  region      String
+  medianTotal Float
+  currency    String
+  updatedAt   DateTime @updatedAt
+
+  @@unique([role, location, region])
+}
+
+model SalarySubmission {
+  id                  String   @id @default(cuid())
+
+  userId              String
+
+  company             String
+  role                String
+  level               String?
+  location            String
+
+  baseSalary          Int
+  stockGrant          Int?
+  bonus               Int?
+  totalCompensation   Int?
+
+  currency            String   @default("INR")
+
+  yearsExperience     Int?
+
+  employmentType      String?
+  remotePolicy        String?
+
+  review              String?
+
+  status              String   @default("PENDING")
+
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}
+
+model WorkplaceReview {
+  id                 String            @id @default(cuid())
+  companyId          String
+  userId             String?
+  rating             Float
+  workLifeRating     Float?
+  cultureRating      Float?
+  compensationRating Float?
+  growthRating       Float?
+  title              String
+  pros               String
+  cons               String
+  adviceToMgmt       String?
+  jobTitle           String?
+  isCurrentEmployee  Boolean           @default(false)
+  employmentStatus   EmploymentStatus?
+  location           String?
+  isVerified         Boolean           @default(false)
+  approvedAt         DateTime?
+  createdAt          DateTime          @default(now())
+  helpfulVotes       ReviewHelpful[]
+  company            Company           @relation(fields: [companyId], references: [id])
+  user               User?             @relation(fields: [userId], references: [id])
+
+  @@index([companyId])
+}
+
+model ReviewHelpful {
+  id       String          @id @default(cuid())
+  reviewId String
+  userId   String
+  review   WorkplaceReview @relation(fields: [reviewId], references: [id])
+  user     User            @relation(fields: [userId], references: [id])
+
+  @@unique([reviewId, userId])
+}
+
+model InterviewExperience {
+  id            String              @id @default(cuid())
+  companyId     String
+  userId        String?
+  role          String
+  difficulty    InterviewDifficulty
+  outcome       InterviewOutcome
+  process       String
+  rounds        Int?
+  duration      String?
+  location      String?
+  isRemote      Boolean             @default(false)
+  offerReceived Boolean             @default(false)
+  isVerified    Boolean             @default(false)
+  approvedAt    DateTime?
+  createdAt     DateTime            @default(now())
+  company       Company             @relation(fields: [companyId], references: [id])
+  user          User?               @relation(fields: [userId], references: [id])
+}
+
+model InterviewQuestion {
+  id           String                    @id @default(cuid())
+  companyId    String
+  role         String
+  questionText String
+  questionType QuestionType
+  difficulty   InterviewDifficulty
+  tags         String[]
+  upvotes      Int                       @default(0)
+  isVerified   Boolean                   @default(false)
+  createdAt    DateTime                  @default(now())
+  company      Company                   @relation(fields: [companyId], references: [id])
+  answers      InterviewQuestionAnswer[]
+}
+
+model InterviewQuestionAnswer {
+  id         String            @id @default(cuid())
+  questionId String
+  userId     String?
+  answerText String
+  upvotes    Int               @default(0)
+  createdAt  DateTime          @default(now())
+  question   InterviewQuestion @relation(fields: [questionId], references: [id])
+  user       User?             @relation(fields: [userId], references: [id])
+}
+
+model JobListing {
+  id          String    @id @default(cuid())
+  companyId   String
+  title       String
+  slug        String    @unique
+  description String
+  role        String
+  level       JobLevel?
+  location    String
+  isRemote    Boolean   @default(false)
+  salaryMin   Float?
+  salaryMax   Float?
+  currency    String
+  region      String
+  skills      String[]
+  applyUrl    String
+  source      JobSource
+  expiresAt   DateTime?
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  company     Company   @relation(fields: [companyId], references: [id])
+
+  @@index([region])
+}
+
+model ForumCategory {
+  id          String        @id @default(cuid())
+  name        String
+  slug        String        @unique
+  description String?
+  icon        String?
+  memberCount Int           @default(0)
+  sortOrder   Int           @default(0)
+  threads     ForumThread[]
+}
+
+model ForumThread {
+  id         String        @id @default(cuid())
+  categoryId String
+  authorId   String
+  companyId  String?
+  title      String
+  slug       String        @unique
+  content    String
+  tags       String[]
+  upvotes    Int           @default(0)
+  viewCount  Int           @default(0)
+  replyCount Int           @default(0)
+  isPinned   Boolean       @default(false)
+  isHot      Boolean       @default(false)
+  isTrending Boolean       @default(false)
+  region     String
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+  replies    ForumReply[]
+  author     User          @relation(fields: [authorId], references: [id])
+  category   ForumCategory @relation(fields: [categoryId], references: [id])
+  company    Company?      @relation(fields: [companyId], references: [id])
+}
+
+model ForumReply {
+  id        String       @id @default(cuid())
+  threadId  String
+  authorId  String
+  content   String
+  upvotes   Int          @default(0)
+  parentId  String?
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  author    User         @relation(fields: [authorId], references: [id])
+  parent    ForumReply?  @relation("ReplyTree", fields: [parentId], references: [id])
+  children  ForumReply[] @relation("ReplyTree")
+  thread    ForumThread  @relation(fields: [threadId], references: [id])
+}
+
+model OfferEntry {
+  id          String    @id @default(cuid())
+  userId      String?
+  companyId   String
+  role        String
+  level       JobLevel?
+  baseSalary  Float
+  totalComp   Float
+  bonus       Float?
+  equity      Float?
+  currency    String
+  location    String
+  region      String
+  yearsExp    Float?
+  negotiated  Boolean   @default(false)
+  finalComp   Float?
+  isAnonymous Boolean   @default(true)
+  isVerified  Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  company     Company   @relation(fields: [companyId], references: [id])
+  user        User?     @relation(fields: [userId], references: [id])
+}
+
+model OfferComparison {
+  id        String   @id @default(cuid())
+  userId    String?
+  name      String
+  offerIds  String[]
+  notes     String?
+  createdAt DateTime @default(now())
+  user      User?    @relation(fields: [userId], references: [id])
+}
+
+model ToolUsageLog {
+  id        String   @id @default(cuid())
+  toolType  ToolType
+  userId    String?
+  inputHash String
+  region    String?
+  createdAt DateTime @default(now())
+  user      User?    @relation(fields: [userId], references: [id])
+
+  @@index([toolType])
+}
+
+model WorkplaceRanking {
+  id          String              @id @default(cuid())
+  companyId   String
+  category    RankingCategoryType
+  rank        Int
+  score       Float
+  region      String
+  year        Int
+  month       Int
+  methodology String?
+  updatedAt   DateTime            @updatedAt
+  company     Company             @relation(fields: [companyId], references: [id])
+
+  @@index([category, region])
+}
+
+model RankingCategory {
+  id          String  @id @default(cuid())
+  name        String
+  slug        String  @unique
+  description String?
+  icon        String?
+  methodology String?
+}
+
+enum UserRole {
+  ADMIN
+  MODERATOR
+  EMPLOYER
+  CONTRIBUTOR
+  USER
+}
+
+enum CompanySize {
+  STARTUP
+  SMALL
+  MID_SIZE
+  LARGE
+  ENTERPRISE
+}
+
+enum JobLevel {
+  INTERN
+  JUNIOR
+  MID
+  SENIOR
+  STAFF
+  PRINCIPAL
+  DIRECTOR
+  VP
+}
+
+enum EducationLevel {
+  HIGH_SCHOOL
+  BACHELORS
+  MASTERS
+  MBA
+  PHD
+}
+
+enum EmploymentStatus {
+  CURRENT
+  FORMER
+  INTERN
+  CONTRACT
+}
+
+enum InterviewDifficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+enum InterviewOutcome {
+  OFFER
+  REJECTED
+  PENDING
+  WITHDREW
+}
+
+enum QuestionType {
+  CODING
+  SYSTEM_DESIGN
+  BEHAVIORAL
+  CASE_STUDY
+  TECHNICAL
+}
+
+enum JobSource {
+  COMPANY
+  LINKEDIN
+  GREENHOUSE
+  LEVER
+  INTERNAL
+}
+
+enum JobStatus {
+  PENDING
+  RUNNING
+  DONE
+  FAILED
+}
+
+enum ToolType {
+  SALARY_CALC
+  HIKE_CALC
+  EQUITY_CALC
+  OFFER_COMPARATOR
+  RESUME_ANALYZER
+  TAX_CALC
+}
+
+enum RankingCategoryType {
+  OVERALL
+  WLB
+  BEST_PAYING
+  MILLENNIALS
+  GEN_Z
+  MOST_LOVED
+}

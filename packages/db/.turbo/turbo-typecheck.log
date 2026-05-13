@@ -1,0 +1,4 @@
+
+> @talentdash/db@1.0.0 typecheck /Users/ashishkumarjha/Desktop/talentdash/packages/db
+> tsc --noEmit
+

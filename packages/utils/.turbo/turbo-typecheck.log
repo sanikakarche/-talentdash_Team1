@@ -1,0 +1,4 @@
+
+> @talentdash/utils@1.0.0 typecheck /Users/ashishkumarjha/Desktop/talentdash/packages/utils
+> tsc --noEmit
+

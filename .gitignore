@@ -1,0 +1,43 @@
+# dependencies
+node_modules
+.pnpm-store
+
+# next.js
+.next
+out
+
+# turbo
+.turbo
+
+# builds
+dist
+build
+coverage
+
+# env files
+.env
+.env.local
+.env.*
+!.env.example
+
+# vercel
+.vercel
+
+# logs
+*.log
+typecheck.log
+
+# macOS
+.DS_Store
+
+# vscode
+.vscode
+
+# prisma
+*.db
+*.db-journal
+
+# misc
+tmp
+temp
+.cache

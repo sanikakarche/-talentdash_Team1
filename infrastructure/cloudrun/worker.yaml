@@ -1,0 +1,58 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: talentdash-jobs-worker
+  annotations:
+    run.googleapis.com/ingress: all
+    run.googleapis.com/launch-stage: BETA
+spec:
+  template:
+    metadata:
+      annotations:
+        # Scale to zero when idle, max 3 to prevent budget overrun
+        autoscaling.knative.dev/minScale: '0'
+        autoscaling.knative.dev/maxScale: '3'
+        # CPU allocation ONLY during request processing to save money
+        run.googleapis.com/cpu-throttling: 'true'
+    spec:
+      containerConcurrency: 80
+      timeoutSeconds: 300 # 5 minutes max per request (health probes, graceful shutdown)
+      containers:
+      - image: gcr.io/PROJECT_ID/talentdash-jobs:latest
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 512Mi
+        ports:
+        - name: http1
+          containerPort: 8080
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: LOG_LEVEL
+          value: "info"
+        - name: NEXT_PUBLIC_APP_URL
+          value: "https://talentdash.in"
+        - name: WORKER_CONCURRENCY
+          value: "5"
+        # Secrets (Replace with Secret Manager references in production)
+        - name: REDIS_URL
+          value: "rediss://default:PASSWORD@HOST:PORT"
+        - name: DATABASE_URL
+          value: "postgres://USER:PASSWORD@HOST:PORT/DB"
+        startupProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 5
+          timeoutSeconds: 2
+          periodSeconds: 5
+          failureThreshold: 3
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 15
+          timeoutSeconds: 2
+          periodSeconds: 30
+          failureThreshold: 3

@@ -1,0 +1,109 @@
+
+   • Packages in scope: @talentdash/jobs
+   • Running typecheck in 1 packages
+   • Remote caching disabled
+
+@talentdash/types:typecheck: cache hit, replaying logs b0223ba140fbe9a5
+@talentdash/types:typecheck: 
+@talentdash/types:typecheck: 
+@talentdash/types:typecheck: > @talentdash/types@1.0.0 typecheck /Users/ashishkumarjha/Desktop/talentdash/packages/types
+@talentdash/types:typecheck: > tsc --noEmit
+@talentdash/types:typecheck: 
+@talentdash/db:typecheck: cache hit, replaying logs 4bf4873aa1bce2a9
+@talentdash/db:typecheck: 
+@talentdash/db:typecheck: 
+@talentdash/db:typecheck: > @talentdash/db@1.0.0 typecheck /Users/ashishkumarjha/Desktop/talentdash/packages/db
+@talentdash/db:typecheck: > tsc --noEmit
+@talentdash/db:typecheck: 
+@talentdash/utils:typecheck: cache hit, replaying logs 718afafa382f67a0
+@talentdash/utils:typecheck: 
+@talentdash/utils:typecheck: 
+@talentdash/utils:typecheck: > @talentdash/utils@1.0.0 typecheck /Users/ashishkumarjha/Desktop/talentdash/packages/utils
+@talentdash/utils:typecheck: > tsc --noEmit
+@talentdash/utils:typecheck: 
+@talentdash/jobs:typecheck: cache miss, executing cc0ed078bf74edcc
+@talentdash/jobs:typecheck: 
+@talentdash/jobs:typecheck: > @talentdash/jobs@1.0.0 typecheck /Users/ashishkumarjha/Desktop/talentdash/apps/jobs
+@talentdash/jobs:typecheck: > tsc --noEmit
+@talentdash/jobs:typecheck: 
+@talentdash/jobs:typecheck: src/app.ts(2,32): error TS6059: File '/Users/ashishkumarjha/Desktop/talentdash/packages/types/src/index.ts' is not under 'rootDir' '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src'. 'rootDir' is expected to contain all source files.
+@talentdash/jobs:typecheck:   The file is in the program because:
+@talentdash/jobs:typecheck:     Imported via "@talentdash/types" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/app.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/types" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/queues/factory.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/types" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/queues/registry.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/types" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/workers/manager.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/types" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/workers/base-processor.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/types" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/processors/salary-aggregation.processor.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/types" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/processors/salary-aggregation.processor.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/types" from file '/Users/ashishkumarjha/Desktop/talentdash/packages/utils/src/region.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/types" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/processors/company-stats.processor.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/types" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/processors/company-stats.processor.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/types" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/processors/ranking-recompute.processor.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/types" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/processors/ranking-recompute.processor.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/types" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/processors/ranking-recompute.processor.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/types" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/processors/search-indexing.processor.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/types" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/processors/search-indexing.processor.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/types" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/processors/sitemap-generation.processor.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/types" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/processors/sitemap-generation.processor.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/types" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/processors/page-regeneration.processor.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/types" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/processors/page-regeneration.processor.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/types" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/processors/ai-enrichment.processor.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/types" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/processors/ai-enrichment.processor.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/types" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/processors/heatmap-recompute.processor.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/types" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/processors/heatmap-recompute.processor.ts'
+@talentdash/jobs:typecheck: src/lib/env.ts(34,14): error TS2769: No overload matches this call.
+@talentdash/jobs:typecheck:   Overload 1 of 2, '(def: number): ZodDefault<ZodPipe<ZodPipe<ZodString, ZodTransform<number, string>>, ZodNumber>>', gave the following error.
+@talentdash/jobs:typecheck:     Argument of type 'string' is not assignable to parameter of type 'number'.
+@talentdash/jobs:typecheck:   Overload 2 of 2, '(def: () => number): ZodDefault<ZodPipe<ZodPipe<ZodString, ZodTransform<number, string>>, ZodNumber>>', gave the following error.
+@talentdash/jobs:typecheck:     Argument of type 'string' is not assignable to parameter of type '() => number'.
+@talentdash/jobs:typecheck: src/lib/env.ts(41,14): error TS2769: No overload matches this call.
+@talentdash/jobs:typecheck:   Overload 1 of 2, '(def: number): ZodDefault<ZodPipe<ZodPipe<ZodString, ZodTransform<number, string>>, ZodNumber>>', gave the following error.
+@talentdash/jobs:typecheck:     Argument of type 'string' is not assignable to parameter of type 'number'.
+@talentdash/jobs:typecheck:   Overload 2 of 2, '(def: () => number): ZodDefault<ZodPipe<ZodPipe<ZodString, ZodTransform<number, string>>, ZodNumber>>', gave the following error.
+@talentdash/jobs:typecheck:     Argument of type 'string' is not assignable to parameter of type '() => number'.
+@talentdash/jobs:typecheck: src/processors/salary-aggregation.processor.ts(4,20): error TS6059: File '/Users/ashishkumarjha/Desktop/talentdash/packages/db/src/index.ts' is not under 'rootDir' '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src'. 'rootDir' is expected to contain all source files.
+@talentdash/jobs:typecheck:   The file is in the program because:
+@talentdash/jobs:typecheck:     Imported via "@talentdash/db" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/processors/salary-aggregation.processor.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/db" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/processors/company-stats.processor.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/db" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/processors/ranking-recompute.processor.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/db" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/processors/search-indexing.processor.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/db" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/processors/sitemap-generation.processor.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/db" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/processors/page-regeneration.processor.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/db" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/processors/ai-enrichment.processor.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/db" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/processors/heatmap-recompute.processor.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/db" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/recompute-heatmap.ts'
+@talentdash/jobs:typecheck: src/processors/salary-aggregation.processor.ts(5,28): error TS6059: File '/Users/ashishkumarjha/Desktop/talentdash/packages/utils/src/index.ts' is not under 'rootDir' '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src'. 'rootDir' is expected to contain all source files.
+@talentdash/jobs:typecheck:   The file is in the program because:
+@talentdash/jobs:typecheck:     Imported via "@talentdash/utils" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/processors/salary-aggregation.processor.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/utils" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/processors/company-stats.processor.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/utils" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/processors/heatmap-recompute.processor.ts'
+@talentdash/jobs:typecheck:     Imported via "@talentdash/utils" from file '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src/recompute-heatmap.ts'
+@talentdash/jobs:typecheck: src/queues/factory.ts(64,31): error TS2345: Argument of type 'N' is not assignable to parameter of type 'ExtractNameType<QueuePayloadMap[N], string>'.
+@talentdash/jobs:typecheck:   Type 'string' is not assignable to type 'ExtractNameType<QueuePayloadMap[N], string>'.
+@talentdash/jobs:typecheck:     Type 'string' is not assignable to type 'ExtractNameType<QueuePayloadMap[N], string>'.
+@talentdash/jobs:typecheck: src/queues/factory.ts(79,5): error TS2345: Argument of type '{ name: N; data: QueuePayloadMap[N]; opts: Partial<JobsOptions> | undefined; }[]' is not assignable to parameter of type '{ name: ExtractNameType<QueuePayloadMap[N], string>; data: ExtractDataType<QueuePayloadMap[N], QueuePayloadMap[N]>; opts?: BulkJobOptions | undefined; }[]'.
+@talentdash/jobs:typecheck:   Type '{ name: N; data: QueuePayloadMap[N]; opts: Partial<JobsOptions> | undefined; }' is not assignable to type '{ name: ExtractNameType<QueuePayloadMap[N], string>; data: ExtractDataType<QueuePayloadMap[N], QueuePayloadMap[N]>; opts?: BulkJobOptions | undefined; }'.
+@talentdash/jobs:typecheck:     Types of property 'name' are incompatible.
+@talentdash/jobs:typecheck:       Type 'N' is not assignable to type 'ExtractNameType<QueuePayloadMap[N], string>'.
+@talentdash/jobs:typecheck:         Type 'string' is not assignable to type 'ExtractNameType<QueuePayloadMap[N], string>'.
+@talentdash/jobs:typecheck:           Type 'string' is not assignable to type 'ExtractNameType<QueuePayloadMap[N], string>'.
+@talentdash/jobs:typecheck: src/recompute-heatmap.ts(1,31): error TS2307: Cannot find module 'next/cache' or its corresponding type declarations.
+@talentdash/jobs:typecheck: ../../packages/db/src/index.ts(1,15): error TS6059: File '/Users/ashishkumarjha/Desktop/talentdash/packages/db/src/client.ts' is not under 'rootDir' '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src'. 'rootDir' is expected to contain all source files.
+@talentdash/jobs:typecheck:   The file is in the program because:
+@talentdash/jobs:typecheck:     Imported via "./client" from file '/Users/ashishkumarjha/Desktop/talentdash/packages/db/src/index.ts'
+@talentdash/jobs:typecheck:     Imported via "./client" from file '/Users/ashishkumarjha/Desktop/talentdash/packages/db/src/aggregates.ts'
+@talentdash/jobs:typecheck: ../../packages/db/src/index.ts(2,15): error TS6059: File '/Users/ashishkumarjha/Desktop/talentdash/packages/db/src/aggregates.ts' is not under 'rootDir' '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src'. 'rootDir' is expected to contain all source files.
+@talentdash/jobs:typecheck: ../../packages/db/src/index.ts(3,15): error TS6059: File '/Users/ashishkumarjha/Desktop/talentdash/packages/db/src/env.ts' is not under 'rootDir' '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src'. 'rootDir' is expected to contain all source files.
+@talentdash/jobs:typecheck: ../../packages/types/src/index.ts(1,15): error TS6059: File '/Users/ashishkumarjha/Desktop/talentdash/packages/types/src/region.ts' is not under 'rootDir' '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src'. 'rootDir' is expected to contain all source files.
+@talentdash/jobs:typecheck: ../../packages/types/src/index.ts(2,15): error TS6059: File '/Users/ashishkumarjha/Desktop/talentdash/packages/types/src/jobs.ts' is not under 'rootDir' '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src'. 'rootDir' is expected to contain all source files.
+@talentdash/jobs:typecheck: ../../packages/utils/src/index.ts(1,15): error TS6059: File '/Users/ashishkumarjha/Desktop/talentdash/packages/utils/src/region.ts' is not under 'rootDir' '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src'. 'rootDir' is expected to contain all source files.
+@talentdash/jobs:typecheck: ../../packages/utils/src/index.ts(2,15): error TS6059: File '/Users/ashishkumarjha/Desktop/talentdash/packages/utils/src/cache.ts' is not under 'rootDir' '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src'. 'rootDir' is expected to contain all source files.
+@talentdash/jobs:typecheck: ../../packages/utils/src/index.ts(3,15): error TS6059: File '/Users/ashishkumarjha/Desktop/talentdash/packages/utils/src/cache-keys.ts' is not under 'rootDir' '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src'. 'rootDir' is expected to contain all source files.
+@talentdash/jobs:typecheck: ../../packages/utils/src/index.ts(4,15): error TS6059: File '/Users/ashishkumarjha/Desktop/talentdash/packages/utils/src/cache-tags.ts' is not under 'rootDir' '/Users/ashishkumarjha/Desktop/talentdash/apps/jobs/src'. 'rootDir' is expected to contain all source files.
+@talentdash/jobs:typecheck:  ELIFECYCLE  Command failed with exit code 2.
+
+ Tasks:    3 successful, 4 total
+Cached:    3 cached, 4 total
+  Time:    2.152s 
+Failed:    @talentdash/jobs#typecheck
+

@@ -1,0 +1,5 @@
+
+
+> @talentdash/jobs@1.0.0 typecheck /Users/ashishkumarjha/Desktop/talentdash/apps/jobs
+> tsc --noEmit
+
