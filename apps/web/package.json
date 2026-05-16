@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@tailwindcss/postcss": "^4.3.0",
     "@talentdash/auth": "workspace:*",
     "@talentdash/db": "workspace:*",
     "@talentdash/types": "workspace:*",

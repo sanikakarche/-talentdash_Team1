@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .rounded-card {
+    border-radius: 0.75rem;
+  }
+}
