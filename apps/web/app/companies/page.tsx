@@ -23,7 +23,6 @@ export default function CompaniesPage() {
           </div>
         </div>
       </section>
-
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {companies.map((c) => (
@@ -33,7 +32,7 @@ export default function CompaniesPage() {
                   <h3 className="font-bold text-gray-900 text-lg">{c.name}</h3>
                   <p className="text-sm text-gray-500 mt-1">{c.industry} · {c.employees}</p>
                 </div>
-                <div className="bg-green-50 px-2 py-1 rounded-lg text-center">
+                <div className="bg-green-50 px-3 py-1 rounded-lg text-center">
                   <p className="font-bold text-green-700">{c.rating}</p>
                   <p className="text-yellow-400 text-xs">★★★★</p>
                 </div>
