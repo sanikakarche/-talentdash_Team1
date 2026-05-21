@@ -1,13 +1,13 @@
 export default function CompaniesPage() {
   const companies = [
-    { name: "Google", industry: "Technology", rating: 4.4, reviews: "12K", avg: "₹45L", employees: "150K+", recommend: 89 },
-    { name: "Microsoft", industry: "Technology", rating: 4.3, reviews: "15K", avg: "₹38L", employees: "220K+", recommend: 87 },
-    { name: "Amazon", industry: "E-commerce", rating: 3.8, reviews: "22K", avg: "₹32L", employees: "500K+", recommend: 71 },
-    { name: "Flipkart", industry: "E-commerce", rating: 4.0, reviews: "8K", avg: "₹28L", employees: "30K+", recommend: 78 },
-    { name: "Swiggy", industry: "Food Tech", rating: 3.9, reviews: "4K", avg: "₹22L", employees: "5K+", recommend: 74 },
-    { name: "Zomato", industry: "Food Tech", rating: 3.7, reviews: "3K", avg: "₹20L", employees: "4K+", recommend: 69 },
-    { name: "Infosys", industry: "IT Services", rating: 3.6, reviews: "30K", avg: "₹8L", employees: "300K+", recommend: 65 },
-    { name: "TCS", industry: "IT Services", rating: 3.5, reviews: "45K", avg: "₹7L", employees: "600K+", recommend: 62 },
+    { name: "Google", slug: "google", industry: "Technology", rating: 4.4, reviews: "12K", avg: "₹45L", employees: "150K+", recommend: 89 },
+    { name: "Microsoft", slug: "microsoft", industry: "Technology", rating: 4.3, reviews: "15K", avg: "₹38L", employees: "220K+", recommend: 87 },
+    { name: "Amazon", slug: "amazon", industry: "E-commerce", rating: 3.8, reviews: "22K", avg: "₹32L", employees: "500K+", recommend: 71 },
+    { name: "Flipkart", slug: "flipkart", industry: "E-commerce", rating: 4.0, reviews: "8K", avg: "₹28L", employees: "30K+", recommend: 78 },
+    { name: "Swiggy", slug: "swiggy", industry: "Food Tech", rating: 3.9, reviews: "4K", avg: "₹22L", employees: "5K+", recommend: 74 },
+    { name: "Zomato", slug: "zomato", industry: "Food Tech", rating: 3.7, reviews: "3K", avg: "₹20L", employees: "4K+", recommend: 69 },
+    { name: "Infosys", slug: "infosys", industry: "IT Services", rating: 3.6, reviews: "30K", avg: "₹8L", employees: "300K+", recommend: 65 },
+    { name: "TCS", slug: "tcs", industry: "IT Services", rating: 3.5, reviews: "45K", avg: "₹7L", employees: "600K+", recommend: 62 },
   ];
 
   return (
@@ -26,7 +26,7 @@ export default function CompaniesPage() {
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {companies.map((c) => (
-            <div key={c.name} className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow cursor-pointer">
+            <a key={c.name} href={`/companies/${c.slug}`} className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-md transition-shadow block">
               <div className="flex items-start justify-between">
                 <div>
                   <h3 className="font-bold text-gray-900 text-lg">{c.name}</h3>
@@ -51,7 +51,7 @@ export default function CompaniesPage() {
                   <p className="font-bold text-green-700 text-sm">{c.recommend}%</p>
                 </div>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>
